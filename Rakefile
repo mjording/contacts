@@ -1,10 +1,12 @@
 require 'rubygems'
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-require 'rake/gempackagetask'
+require 'rdoc/task'
+require 'rubygems/package_task'
 require 'rake/contrib/rubyforgepublisher'
-require 'lib/contacts'
+require 'gdata'
+$:. << 'lib'
+require 'contacts'
 
 PKG_VERSION = Contacts::VERSION
 
@@ -31,7 +33,7 @@ end
 
 # Genereate the RDoc documentation
 desc "Create documentation"
-Rake::RDocTask.new("doc") { |rdoc|
+RDoc::Task.new("doc") { |rdoc|
   rdoc.title = "Contact List - ridiculously easy contact list information from various providers including Yahoo, Gmail, and Hotmail"
   rdoc.rdoc_dir = 'doc'
   rdoc.rdoc_files.include('README')
@@ -61,8 +63,8 @@ spec = Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.autorequire = 'contacts'
 
-  s.add_dependency('json', '>= 0.4.1')
-  s.add_dependency('gdata', '= 1.1.1')
+  s.add_dependency('json')
+  s.add_dependency('gdata', '= 1.1.2')
   s.requirements << "A json parser, the gdata ruby gem"
 
   #### Documentation and testing.
@@ -76,7 +78,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = "http://rubyforge.org/projects/contacts"
 end
 
-Rake::GemPackageTask.new(spec) do |pkg|
+Gem::PackageTask.new(spec) do |pkg|
   pkg.need_zip = true
   pkg.need_tar = true
 end

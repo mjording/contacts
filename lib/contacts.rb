@@ -1,12 +1,8 @@
-$:.unshift(File.dirname(__FILE__)+"/contacts/")
-
-require 'rubygems'
-
-require 'base'
-require 'json_picker'
-require 'gmail'
-require 'hotmail'
-require 'yahoo'
-require 'plaxo'
-require 'aol'
-require 'mailru'
+require 'contacts/base'
+require 'contacts/json_picker'
+require 'contacts/gmail'
+require 'contacts/hotmail'
+require 'contacts/yahoo'
+require 'contacts/plaxo'
+require 'contacts/aol'
+require 'contacts/mailru'
